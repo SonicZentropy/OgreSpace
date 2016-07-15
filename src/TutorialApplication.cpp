@@ -46,11 +46,67 @@ bool TutorialApplication::frameRenderingQueued(const FrameEvent& fe)
 {
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
+	if (!processUnbufferedInput(fe))
+		return false;
+
 	return ret;
 }
 
 bool TutorialApplication::processUnbufferedInput(const FrameEvent& fe)
 {
+	static bool mouseDownLastFrame = false;
+	static Real toggleTimer = 0.0;
+	static Real rotate = .13;
+	static Real move = 250;
+
+	bool leftMouseDown = mMouse->getMouseState().buttonDown(OIS::MB_Left);
+
+	if (leftMouseDown && !mouseDownLastFrame)
+	{
+		Light* light = mSceneMgr->getLight("PointLight");
+		light->setVisible(!light->isVisible());
+	}
+
+	mouseDownLastFrame = leftMouseDown;
+
+	toggleTimer -= fe.timeSinceLastFrame;
+
+	if ((toggleTimer < 0) && mMouse->getMouseState().buttonDown(OIS::MB_Right))
+	{
+		toggleTimer = 0.5;
+
+		Light* light = mSceneMgr->getLight("PointLight");
+		light->setVisible(!light->isVisible());
+	}
+
+	Vec3 dirVec = Vec3::ZERO;
+
+	if (mKeyboard->isKeyDown(OIS::KC_I))
+		dirVec.z -= move;
+	if (mKeyboard->isKeyDown(OIS::KC_K))
+		dirVec.z += move;
+	if (mKeyboard->isKeyDown(OIS::KC_U))
+		dirVec.y += move;
+	if (mKeyboard->isKeyDown(OIS::KC_O))
+		dirVec.y -= move;
+	if (mKeyboard->isKeyDown(OIS::KC_J))
+	{
+		if (mKeyboard->isKeyDown(OIS::KC_LSHIFT)) // Rotate if shift held
+			mSceneMgr->getSceneNode("NinjaNode")->yaw(Ogre::Degree(5 * rotate));
+		else
+			dirVec.x -= move;
+	}
+
+	if (mKeyboard->isKeyDown(OIS::KC_L))
+	{
+		if (mKeyboard->isKeyDown(OIS::KC_LSHIFT))
+			mSceneMgr->getSceneNode("NinjaNode")->yaw(Ogre::Degree(-5 * rotate));
+		else
+			dirVec.x += move;
+	}
+
+	mSceneMgr->getSceneNode("NinjaNode")->translate(dirVec * fe.timeSinceLastFrame, Node::TS_LOCAL);
+
 	return true;
 }
 //---------------------------------------------------------------------------
