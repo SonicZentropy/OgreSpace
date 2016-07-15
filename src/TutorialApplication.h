@@ -23,6 +23,8 @@ http://www.ogre3d.org/wiki/
 #include "BaseApplication.h"
 #include "ZenHeader.h"
 
+using namespace Ogre;
+
 //---------------------------------------------------------------------------
 class TutorialApplication : public BaseApplication
 {
@@ -32,20 +34,10 @@ public:
 
 protected:
 	virtual void createScene() override;
-	virtual void createFrameListener() override;
-	virtual void destroyScene() override;
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe) override;
+	virtual bool frameRenderingQueued(const FrameEvent& fe) override;
 
 private:
-	void defineTerrain(long x, long y);
-	void initBlendMaps(Ogre::Terrain* terrain);
-	void configureTerrainDefaults(Ogre::Light* light);
-
-	bool mTerrainsImported;
-	Ogre::TerrainGroup* mTerrainGroup;
-	Ogre::TerrainGlobalOptions* mTerrainGlobals;
-	OgreBites::Label* mInfoLabel;
-	Ogre::SceneNode* mRootNode;
+	bool processUnbufferedInput(const FrameEvent& fe);
 
 };
 //---------------------------------------------------------------------------
