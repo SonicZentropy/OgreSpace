@@ -34,10 +34,22 @@ public:
 
 protected:
 	virtual void createScene() override;
-	virtual bool frameRenderingQueued(const FrameEvent& fe) override;
-
-private:
+	virtual void createCamera() override;
+	virtual void createViewports() override;
+	virtual void createFrameListener() override;
+	virtual void destroyScene() override;
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe) override;
 	bool processUnbufferedInput(const FrameEvent& fe);
+private:
+	void defineTerrain(long x, long y);
+	void initBlendMaps(Ogre::Terrain* terrain);
+	void configureTerrainDefaults(Ogre::Light* light);
+
+	bool mTerrainsImported;
+	Ogre::TerrainGroup* mTerrainGroup;
+	Ogre::TerrainGlobalOptions* mTerrainGlobals;
+
+	OgreBites::Label* mInfoLabel;
 
 };
 //---------------------------------------------------------------------------

@@ -2,6 +2,8 @@
 #ifndef OGRE_ZENHEADER_INCLUDED
 #define OGRE_ZENHEADER_INCLUDED
 
+#include "ZenVectorMath.hpp"
+
 using Vec3 = Ogre::Vector3;
 using Vec2 = Ogre::Vector2;
 

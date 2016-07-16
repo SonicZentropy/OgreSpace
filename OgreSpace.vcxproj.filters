@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\Zen">
+      <UniqueIdentifier>{697e4db7-ef1e-4edc-b926-31ae06a55bd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BaseApplication.cpp">
@@ -26,7 +29,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\zen\ZenHeader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Zen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\zen\ZenVectorMath.hpp">
+      <Filter>Header Files\Zen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

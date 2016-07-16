@@ -26,6 +26,7 @@
     <ClInclude Include="src\BaseApplication.h" />
     <ClInclude Include="src\TutorialApplication.h" />
     <ClInclude Include="src\zen\ZenHeader.h" />
+    <ClInclude Include="src\zen\ZenVectorMath.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CE7ED6AF-DCAB-4963-AB76-34A7DA792F13}</ProjectGuid>
